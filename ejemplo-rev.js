@@ -4,7 +4,7 @@ var puntos = [];
 for ( var i = 0; i < 100; i ++ ) {
     puntos.push( new THREE.Vector2(
                      Math.sin( i * 0.0281 ) * 50,
-                     i*0.973 );
+                     i*0.973 ));
 }
 
 var forma = new THREE.LatheGeometry(puntos);
