@@ -1,5 +1,5 @@
 var puntos = [];
-Se insertan 50 puntos en el arreglo con diversos valores.
+//Se insertan 50 puntos en el arreglo con diversos valores.
 
 for ( var i = 0; i < 50; i ++ ) {
     puntos.push( new THREE.Vector2(
