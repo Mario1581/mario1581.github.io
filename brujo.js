@@ -1,11 +1,11 @@
 var puntos = [];
 
-puntos.push( new THREE.Vector2(0, 0);
-puntos.push( new THREE.Vector2(1, 0);
-puntos.push( new THREE.Vector2(1, .1);
-puntos.push( new THREE.Vector2(.5, .1);
-puntos.push( new THREE.Vector2(.1, .5);
-puntos.push( new THREE.Vector2(0, .5);
+puntos.push( new THREE.Vector2(0, 0));
+puntos.push( new THREE.Vector2(1, 0));
+puntos.push( new THREE.Vector2(1, .1));
+puntos.push( new THREE.Vector2(.5, .1));
+puntos.push( new THREE.Vector2(.1, .5));
+puntos.push( new THREE.Vector2(0, .5));
 
 
 var sombrero = new THREE.LatheGeometry(puntos);
