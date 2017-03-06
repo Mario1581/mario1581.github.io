@@ -1,0 +1,477 @@
+<div>
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Entorno Virtual</title>
+        <style>
+            body {
+                text-align: center;
+            }
+
+            canvas {
+                width: 100%;
+                height: 100%;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Practica 1: Entorno Virtual</h1>
+        <p></p>
+        <script src="Three.min.js"></script> <!-- Get the latest version of the Three.js library. -->
+        <script>
+
+            // Brujo
+            var puntos = [];
+
+            puntos.push(new THREE.Vector2(0, 0));
+            puntos.push(new THREE.Vector2(10, 0));
+            puntos.push(new THREE.Vector2(10, 2));
+            puntos.push(new THREE.Vector2(6, 2));
+            puntos.push(new THREE.Vector2(2, 10));
+            puntos.push(new THREE.Vector2(0, 10));
+
+
+            var sombrero = new THREE.LatheGeometry(puntos);
+
+            var pierna = new THREE.CylinderGeometry(4, 4, 24, 50);
+            var pierna1 = new THREE.CylinderGeometry(4, 4, 24, 50);
+
+            var brazoDer = new THREE.CylinderGeometry(4, 4, 24, 50);
+            var brazoIzq = new THREE.CylinderGeometry(4, 4, 24, 50);
+
+            var cabeza = new THREE.SphereGeometry(10);
+            var panza = new THREE.SphereGeometry(20);
+
+            brazoDer.rotateZ(Math.PI / 2);
+            brazoIzq.rotateZ(Math.PI / 2);
+
+            brazoDer.translate(20, 6, 0);
+            brazoIzq.translate(-20, 6, 0);
+
+            cabeza.translate(0, 20, 0);
+            sombrero.translate(0, 27, 0);
+            pierna.translate(8, -20, 0);
+            pierna1.translate(-8, -20, 0);
+
+            var cabezaMalla = new THREE.Mesh(cabeza);
+            var panzaMalla = new THREE.Mesh(panza);
+            var sombreroMalla = new THREE.Mesh(sombrero);
+            var piernaMalla = new THREE.Mesh(pierna);
+            var pierna1Malla = new THREE.Mesh(pierna1);
+            var brazoDerMalla = new THREE.Mesh(brazoDer);
+            var brazoIzqMalla = new THREE.Mesh(brazoIzq);
+
+            var brujo = new THREE.Geometry();
+
+            brujo.merge(cabezaMalla.geometry, cabezaMalla.matrix);
+            brujo.merge(panzaMalla.geometry, panzaMalla.matrix);
+            brujo.merge(sombreroMalla.geometry, sombreroMalla.matrix);
+            brujo.merge(piernaMalla.geometry, piernaMalla.matrix);
+            brujo.merge(pierna1Malla.geometry, pierna1Malla.matrix);
+            brujo.merge(brazoDerMalla.geometry, brazoDerMalla.matrix);
+            brujo.merge(brazoIzqMalla.geometry, brazoIzqMalla.matrix);
+
+            var material = new THREE.MeshNormalMaterial();
+            var brujoMalla = new THREE.Mesh(brujo, material);
+            var brujoMalla2 = new THREE.Mesh(brujo, material);
+
+
+            // Varita
+            var figura = new THREE.Shape();
+
+            figura.moveTo(0, 0);
+
+            figura.lineTo(5, -8.66);
+            figura.lineTo(15, -10.94);
+            figura.lineTo(8.09, -18.17);
+            figura.lineTo(9.14, -28.12);
+            figura.lineTo(0, -24.05);
+            figura.lineTo(-9.14, -28.12);
+            figura.lineTo(-8.09, -18.17);
+            figura.lineTo(-15, -10.94);
+            figura.lineTo(-5, -8.66);
+            figura.lineTo(0, 0);
+
+
+            var forma = new THREE.ExtrudeGeometry(figura, { amount: 10 });
+            forma.translate(0, 20, 0);
+
+            var palo = new THREE.CylinderGeometry(5, 5, 40, 40);
+            palo.translate(0, -20, 5);
+
+            var formaMalla = new THREE.Mesh(forma);
+            var paloMalla = new THREE.Mesh(palo);
+
+            var varita = new THREE.Geometry();
+
+            varita.merge(paloMalla.geometry, paloMalla.matrix);
+            varita.merge(formaMalla.geometry, formaMalla.matrix);
+
+            varita.rotateY(Math.PI / 8);
+
+            var material = new THREE.MeshNormalMaterial();
+            var mallaVarita = new THREE.Mesh(varita, material);
+            var mallaVarita2 = new THREE.Mesh(varita, material);
+            //
+            // Dama
+
+            var points = [];
+            for (var i = 0; i < 10; i++) {
+                points.push(new THREE.Vector2(Math.sin(i * 0.2) * 10 + 5, (i - 5) * 2));
+            }
+
+            var gorro = new THREE.CylinderGeometry(0.1, 5, 10, 32);
+            gorro.translate(0, 35, 0);
+
+            var falda = new THREE.LatheGeometry(points);
+            falda.rotateZ(Math.PI)
+
+            var cabeza1 = new THREE.SphereGeometry(7);
+            cabeza1.translate(0, 25, 0);
+
+            var cuerpo = new THREE.CylinderGeometry(5, 5, 10, 50);
+            cuerpo.translate(0, 15, 0);
+
+            var pie1 = new THREE.CylinderGeometry(3, 3, 10, 50);
+            pie1.translate(-4, -13, 0);
+
+            var pie2 = new THREE.CylinderGeometry(3, 3, 10, 50);
+            pie2.translate(4, -13, 0);
+
+            var mano1 = new THREE.CylinderGeometry(2, 2, 10, 50);
+            mano1.translate(15, -10, 0);
+            mano1.rotateZ(Math.PI / 2);
+
+            var mano2 = new THREE.CylinderGeometry(2, 2, 10, 50);
+            mano2.translate(15, 10, 0);
+            mano2.rotateZ(Math.PI / 2);
+
+
+            var faldaMalla = new THREE.Mesh(falda);
+            var cuerpoMalla = new THREE.Mesh(cuerpo);
+            var cabeza1Malla = new THREE.Mesh(cabeza1);
+            var gorroMalla = new THREE.Mesh(gorro);
+
+            var mano1Malla = new THREE.Mesh(mano1);
+            var mano2Malla = new THREE.Mesh(mano2);
+
+            var pie1Malla = new THREE.Mesh(pie1);
+            var pie2Malla = new THREE.Mesh(pie2);
+
+            var dama = new THREE.Geometry();
+
+            dama.merge(cuerpoMalla.geometry, cuerpoMalla.matrix);
+            dama.merge(faldaMalla.geometry, faldaMalla.matrix);
+            dama.merge(cabeza1Malla.geometry, cabeza1Malla.matrix);
+            dama.merge(gorroMalla.geometry, gorroMalla.matrix);
+            dama.merge(pie1Malla.geometry, pie1Malla.matrix);
+            dama.merge(pie2Malla.geometry, pie1Malla.matrix);
+            dama.merge(mano1Malla.geometry, mano1Malla.matrix);
+            dama.merge(mano2Malla.geometry, mano2Malla.matrix);
+
+            dama.translate(0, -20, 0, 0);
+
+            var material = new THREE.MeshNormalMaterial();
+
+            var damaMalla = new THREE.Mesh(dama, material);
+            var damaMalla2 = new THREE.Mesh(dama, material);
+
+
+            //
+
+            // Llave
+
+            var llave = new THREE.Shape();
+
+            llave.moveTo(10 * 1.25, 5 * 1.25);
+            llave.lineTo(10 * 1.25, 2 * 1.25);
+            llave.lineTo(8 * 1.25, 0);
+            llave.lineTo(0, 0);
+            llave.lineTo(-2 * 1.25, 2 * 1.25);
+            llave.lineTo(-2 * 1.25, 10 * 1.25);
+            llave.lineTo(0, 12 * 1.25);
+            llave.lineTo(8 * 1.25, 12 * 1.25);
+            llave.lineTo(10 * 1.25, 10 * 1.25);
+            llave.lineTo(10 * 1.25, 7 * 1.25);
+            llave.lineTo(50 * 1.25, 8 * 1.25);
+            llave.lineTo(50 * 1.25, 0);
+            llave.lineTo(47 * 1.25, 0);
+            llave.lineTo(47 * 1.25, 4 * 1.25);
+            llave.lineTo(44 * 1.25, 4 * 1.25);
+            llave.lineTo(44 * 1.25, 2 * 1.25);
+            llave.lineTo(42 * 1.25, 2 * 1.25);
+            llave.lineTo(42 * 1.25, 4 * 1.25);
+            llave.lineTo(40 * 1.25, 4 * 1.25);
+            llave.lineTo(40 * 1.25, 0);
+            llave.lineTo(38 * 1.25, 0);
+            llave.lineTo(38 * 1.25, 5 * 1.25);
+            llave.lineTo(10 * 1.25, 5 * 1.25);
+
+            var extruir = {
+                steps: 2,
+                amount: 6 * 1.25,
+                bevelEnabled: true,
+                bevelThickness: 1,
+                bevelSize: 1,
+                bevelSegments: 1
+            };
+
+            var geometria = new THREE.ExtrudeGeometry(llave, extruir);
+
+            geometria.rotateY(Math.PI / -8);
+            geometria.rotateZ(Math.PI / 8);
+
+            var material = new THREE.MeshNormalMaterial();
+            var llaveMalla = new THREE.Mesh(geometria, material);
+            var llaveMalla2 = new THREE.Mesh(geometria, material);
+
+            //
+
+            // Atomo
+            var conoForma = new THREE.ConeGeometry(.65 * 15, 2.1 * 15, 32);
+            var conoForma2 = new THREE.ConeGeometry(.65 * 15, 2.1 * 15, 32);
+            var conoForma3 = new THREE.ConeGeometry(.65 * 15, 2.1 * 15, 32);
+            var conoForma4 = new THREE.ConeGeometry(.65 * 15, 2.1 * 15, 32);
+            var conoForma5 = new THREE.ConeGeometry(.65 * 15, 2.1 * 15, 32);
+            var conoForma6 = new THREE.ConeGeometry(.65 * 15, 2.1 * 15, 32);
+            var toroForma = new THREE.TorusGeometry(2 * 15, .2 * 15, 16 * 15, 100);
+            var toroForma2 = new THREE.TorusGeometry(2 * 15, .2 * 15, 16 * 15, 100);
+            var esferaForma = new THREE.SphereGeometry(.65 * 15);
+
+            conoForma.translate(0, 1 * 15, 0);
+            conoForma2.translate(0, 1 * 15, 0);
+            conoForma2.rotateX(Math.PI);
+            conoForma3.translate(0, 1 * 15, 0);
+            conoForma3.rotateX(Math.PI / 2);
+            conoForma4.translate(0, 1 * 15, 0);
+            conoForma4.rotateX(Math.PI / -2);
+            conoForma5.translate(0, 1 * 15, 0);
+            conoForma5.rotateZ(Math.PI / 2);
+            conoForma6.translate(0, 1 * 15, 0);
+            conoForma6.rotateZ(Math.PI / -2)
+            toroForma.rotateX(Math.PI / 4);
+            toroForma2.rotateX(Math.PI / -4);
+
+            var conoMalla = new THREE.Mesh(conoForma);
+            var conoMalla2 = new THREE.Mesh(conoForma2);
+            var conoMalla3 = new THREE.Mesh(conoForma3);
+            var conoMalla4 = new THREE.Mesh(conoForma4);
+            var conoMalla5 = new THREE.Mesh(conoForma5);
+            var conoMalla6 = new THREE.Mesh(conoForma6);
+            var esferaMalla = new THREE.Mesh(esferaForma);
+            var toroMalla = new THREE.Mesh(toroForma);
+            var toroMalla2 = new THREE.Mesh(toroForma2);
+
+
+            var atomo = new THREE.Geometry();
+            atomo.merge(conoMalla.geometry, conoMalla.matrix);
+            atomo.merge(conoMalla2.geometry, conoMalla2.matrix);
+            atomo.merge(conoMalla3.geometry, conoMalla3.matrix);
+            atomo.merge(conoMalla4.geometry, conoMalla4.matrix);
+            atomo.merge(conoMalla5.geometry, conoMalla5.matrix);
+            atomo.merge(conoMalla6.geometry, conoMalla6.matrix);
+            atomo.merge(esferaMalla.geometry, esferaMalla.matrix);
+            atomo.merge(toroMalla.geometry, toroMalla.matrix);
+            atomo.merge(toroMalla2.geometry, toroMalla2.matrix);
+
+            atomo.rotateY(1.95)
+            atomo.rotateX(1.2)
+            atomo.rotateZ(.2)
+
+
+            var material = new THREE.MeshNormalMaterial();
+            var atomoMalla = new THREE.Mesh(atomo, material);
+            var atomoMalla2 = new THREE.Mesh(atomo, material);
+
+            
+
+            //
+
+            // Tren
+
+            var forma = new THREE.Geometry();
+            var esferaForma = new THREE.SphereGeometry(15.2);
+            var cilindroForma = new THREE.CylinderGeometry(8, 8, 45, 32);
+            var cilindroForma2 = new THREE.CylinderGeometry(6, 6, 35, 32);
+            var cilindroForma3 = new THREE.CylinderGeometry(8, 8, 35, 32);
+            var cilindroForma4 = new THREE.CylinderGeometry(7, 7, 35, 32);
+            var toroForma = new THREE.TorusGeometry(15, 4, 16, 100);
+
+
+            forma.vertices.push(new THREE.Vector3(40, 0, 10)); // Vértice 0
+            forma.vertices.push(new THREE.Vector3(40, 0, -10)); // Vértice 1
+            forma.vertices.push(new THREE.Vector3(-10, 0, -10)); // Vértice 2
+            forma.vertices.push(new THREE.Vector3(-10, 0, 10)); // Vértice 3
+
+            forma.vertices.push(new THREE.Vector3(40, 20, 10)); // Vértice 4
+            forma.vertices.push(new THREE.Vector3(40, 20, -10)); // Vértice 5
+            forma.vertices.push(new THREE.Vector3(-10, 20, -10)); // Vértice 6
+            forma.vertices.push(new THREE.Vector3(-10, 20, 10)); // Vértice 7
+
+            forma.faces.push(new THREE.Face3(3, 1, 2)); // Cara 0
+            forma.faces.push(new THREE.Face3(3, 0, 1)); // Cara 1
+
+            forma.faces.push(new THREE.Face3(3, 4, 7)); // Cara 2
+            forma.faces.push(new THREE.Face3(3, 0, 4)); // Cara 3
+
+            forma.faces.push(new THREE.Face3(0, 5, 4)); // Cara 4
+            forma.faces.push(new THREE.Face3(0, 1, 5)); // Cara 5
+
+            forma.faces.push(new THREE.Face3(1, 6, 5)); // Cara 6
+            forma.faces.push(new THREE.Face3(1, 2, 6)); // Cara 7
+
+            forma.faces.push(new THREE.Face3(2, 7, 6)); // Cara 8
+            forma.faces.push(new THREE.Face3(2, 3, 7)); // Cara 9
+
+            forma.faces.push(new THREE.Face3(7, 5, 6)); // Cara 10
+            forma.faces.push(new THREE.Face3(7, 4, 5)); // Cara 11
+
+            forma.computeBoundingSphere();
+
+            forma.computeFaceNormals();
+
+            //forma.rotateX(Math.PI / 4);
+            //forma.rotateY(3*Math.PI / 2);
+
+            toroForma.rotateY(Math.PI / 2);
+            cilindroForma3.rotateX(Math.PI / 2);
+            cilindroForma4.rotateX(Math.PI / 2);
+
+            esferaForma.translate(-10, 10, 0);
+            toroForma.translate(-3, 10, 0);
+            cilindroForma.translate(10, 25, 0);
+            cilindroForma2.translate(30, 25, 0);
+            cilindroForma3.translate(10, -3, 0);
+            cilindroForma4.translate(30, -3, 0);
+
+            var esferaMalla = new THREE.Mesh(esferaForma);
+            var malla = new THREE.Mesh(forma);
+            var toroMalla = new THREE.Mesh(toroForma);
+            var cilindroMalla = new THREE.Mesh(cilindroForma);
+            var cilindroMalla2 = new THREE.Mesh(cilindroForma2);
+            var cilindroMalla3 = new THREE.Mesh(cilindroForma3);
+            var cilindroMalla4 = new THREE.Mesh(cilindroForma4);
+
+            var trenForma = new THREE.Geometry();
+            trenForma.merge(esferaMalla.geometry, esferaMalla.matrix);
+            trenForma.merge(malla.geometry, malla.matrix);
+            trenForma.merge(toroMalla.geometry, toroMalla.matrix);
+            trenForma.merge(cilindroMalla.geometry, cilindroMalla.matrix);
+            trenForma.merge(cilindroMalla2.geometry, cilindroMalla2.matrix);
+            trenForma.merge(cilindroMalla3.geometry, cilindroMalla3.matrix);
+            trenForma.merge(cilindroMalla4.geometry, cilindroMalla4.matrix);
+
+            trenForma.rotateY(3 * Math.PI / 4);
+            trenForma.translate(0, -20, 0)
+            //trenForma.rotateZ(Math.PI/4);
+
+            var material = new THREE.MeshNormalMaterial();
+            var trenMalla = new THREE.Mesh(trenForma, material);
+            var trenMalla2 = new THREE.Mesh(trenForma, material);
+
+
+
+            //
+            //Tablero
+
+            var tablero = new THREE.BoxGeometry(400, 10, 300);
+            var material = new THREE.MeshNormalMaterial();
+            var tableroMalla = new THREE.Mesh(tablero, material);
+
+            //
+
+
+            var escena = new THREE.Scene();
+
+            escena.add(tableroMalla);
+            escena.add(brujoMalla);
+            escena.add(mallaVarita);
+            escena.add(damaMalla);
+            escena.add(llaveMalla);
+            escena.add(atomoMalla);
+            escena.add(trenMalla);
+
+            escena.add(brujoMalla2);
+            escena.add(mallaVarita2);
+            escena.add(damaMalla2);
+            escena.add(llaveMalla2);
+            escena.add(atomoMalla2);
+            escena.add(trenMalla2);
+
+            var color = new THREE.Color('white');
+            escena.background = color;
+
+            tableroMalla.position.x = 0;
+            tableroMalla.position.y = 0;
+            tableroMalla.position.z = 0;
+
+            brujoMalla.position.x = -150;
+            brujoMalla.position.y = 50;
+            brujoMalla.position.z = -100;
+
+            mallaVarita.position.x = -150;
+            mallaVarita.position.y = 50;
+            mallaVarita.position.z = 0;
+
+            damaMalla.position.x = -150;
+            damaMalla.position.y = 50;
+            damaMalla.position.z = 100;
+
+            llaveMalla.position.x = -50;
+            llaveMalla.position.y = 50;
+            llaveMalla.position.z = -100;
+
+            atomoMalla.position.x = -50;
+            atomoMalla.position.y = 50;
+            atomoMalla.position.z = 0;
+
+            trenMalla.position.x = -50;
+            trenMalla.position.y = 50;
+            atomoMalla.position.z = 100;
+
+            brujoMalla2.position.x = 150;
+            brujoMalla2.position.y = 50;
+            brujoMalla2.position.z = -100;
+
+            mallaVarita2.position.x = 150;
+            mallaVarita2.position.y = 50;
+            mallaVarita2.position.z = 0;
+
+            damaMalla2.position.x = 150;
+            damaMalla2.position.y = 50;
+            damaMalla2.position.z = 100;
+
+            llaveMalla2.position.x = 50;
+            llaveMalla2.position.y = 50;
+            llaveMalla2.position.z = -100;
+
+            atomoMalla2.position.x = 50;
+            atomoMalla2.position.y = 50;
+            atomoMalla2.position.z = 0;
+
+            trenMalla2.position.x = 50;
+            trenMalla2.position.y = 50;
+            atomoMalla2.position.z = 100;
+
+            escena.rotateX(Math.PI/4);
+
+
+            var camara = new THREE.PerspectiveCamera();
+            camara.position.z = 600;
+            camara.position.y = 100;
+            
+
+
+            renderizador = new THREE.WebGLRenderer();
+            renderizador.setSize(window.innerHeight * .95, window.innerHeight * .95);
+            document.body.appendChild(renderizador.domElement);
+            renderizador.render(escena, camara);
+
+        </script>
+    </body>
+</html>
+</div>
