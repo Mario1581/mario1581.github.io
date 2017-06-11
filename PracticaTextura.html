@@ -64,10 +64,8 @@
             brujo.merge(brazoIzqMalla.geometry, brazoIzqMalla.matrix);
 
        	    THREE.ImageUtils.crossOrigin = '';
-  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/box.jpg.jpg');
+  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/textura3.jpg');
   	    var material = new THREE.MeshBasicMaterial( {map: textura} );
-
-
 
             var brujoMalla = new THREE.Mesh(brujo, material);
 
@@ -104,8 +102,11 @@
             varita.merge(formaMalla.geometry, formaMalla.matrix);
 
             varita.rotateY(Math.PI / 8);
-
-            var material = new THREE.MeshNormalMaterial();
+	
+	    THREE.ImageUtils.crossOrigin = '';
+  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/textura4.jpg');
+  	    var material = new THREE.MeshBasicMaterial( {map: textura} );
+	
             var mallaVarita = new THREE.Mesh(varita, material);
 
             //
@@ -167,8 +168,11 @@
 
             dama.translate(0, -20, 0, 0);
 
-            var material = new THREE.MeshNormalMaterial();
 
+	    THREE.ImageUtils.crossOrigin = '';
+  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/textura4.jpg');
+  	    var material = new THREE.MeshBasicMaterial( {map: textura} );
+	
             var damaMalla = new THREE.Mesh(dama, material);
 
 
@@ -216,8 +220,10 @@
 
             geometria.rotateY(Math.PI / -8);
             geometria.rotateZ(Math.PI / 8);
-
-            var material = new THREE.MeshNormalMaterial();
+	
+	    THREE.ImageUtils.crossOrigin = '';
+  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/textura1.jpg');
+  	    var material = new THREE.MeshBasicMaterial( {map: textura} );
             var llaveMalla = new THREE.Mesh(geometria, material);
 
 
@@ -274,8 +280,10 @@
             atomo.rotateX(1.2)
             atomo.rotateZ(.2)
 
-
-            var material = new THREE.MeshNormalMaterial();
+	
+	    THREE.ImageUtils.crossOrigin = '';
+  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/textura6.jpg');
+  	    var material = new THREE.MeshBasicMaterial( {map: textura} );
 
             var atomoMalla = new THREE.Mesh(atomo, material);
 
@@ -361,7 +369,10 @@
             trenForma.translate(0, -20, 0)
             //trenForma.rotateZ(Math.PI/4);
 
-            var material = new THREE.MeshNormalMaterial();
+	
+	    THREE.ImageUtils.crossOrigin = '';
+  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/textura1.jpg');
+  	    var material = new THREE.MeshBasicMaterial( {map: textura} );
             var trenMalla = new THREE.Mesh(trenForma, material);
 
 
