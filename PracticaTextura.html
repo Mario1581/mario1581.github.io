@@ -413,10 +413,10 @@
 
                 var cuadro = new THREE.BoxGeometry(20, 20, 20)
 
-                var color1 = new THREE.Color(Math.random(), Math.random(), Math.random());
+               THREE.ImageUtils.crossOrigin = '';
+  	    var textura = THREE.ImageUtils.loadTexture('https://mario1581.github.io/textura7.jpg');
+  	    var material = new THREE.MeshBasicMaterial( {map: textura} );
 
-                var material = new THREE.MeshBasicMaterial();
-                material.color = color1;
 
                 var cuadroMalla = new THREE.Mesh(cuadro, material);
                 escena.add(cuadroMalla);
@@ -436,7 +436,7 @@
 
             brujoMalla.position.x = -150;
             brujoMalla.position.y = 50;
-            brujoMalla.position.z = -100;
+            brujoMalla.position.z = 0;
 
 
             damaMalla.position.x = -150;
